@@ -2,8 +2,6 @@
 
 namespace Lozemc;
 
-use RuntimeException;
-
 trait Im
 {
     /**

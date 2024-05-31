@@ -2,8 +2,6 @@
 
 namespace Lozemc;
 
-use RuntimeException;
-
 trait Contact
 {
     /**
@@ -42,7 +40,7 @@ trait Contact
 
     /**
      * Изменение контакта
-     * @param string|int $id
+     * @param string $id
      * @param array $data
      * @return array
      */

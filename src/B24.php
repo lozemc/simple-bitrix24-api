@@ -2,11 +2,11 @@
 
 namespace Lozemc;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
 use RuntimeException;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 
 class B24
 {
@@ -15,7 +15,7 @@ class B24
     private $config;
 
     /**
-     * @param string|int $id
+     * @param string $id
      * @param string $host
      * @param string $token
      */

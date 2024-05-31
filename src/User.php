@@ -2,11 +2,8 @@
 
 namespace Lozemc;
 
-use RuntimeException;
-
 trait User
 {
-
     /**
      * Получение пользователя по ID
      * @param string $user_id

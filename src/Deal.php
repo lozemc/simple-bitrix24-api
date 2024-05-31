@@ -2,17 +2,15 @@
 
 namespace Lozemc;
 
-use RuntimeException;
-
 trait Deal
 {
     /**
      * Создание сделки
      * @param array $data
      * @param bool $event
-     * @return mixed|null
+     * @return array
      */
-    public function createDeal(array $data = [], bool $event = true)
+    public function createDeal(array $data = [], bool $event = true): array
     {
         return $this->request('crm.deal.add', $this->setDefaultParams($data, $event));
     }
@@ -30,9 +28,9 @@ trait Deal
     /**
      * Получение списка сделок по фильтру
      * @param array $data
-     * @return mixed|null
+     * @return array
      */
-    public function getDeals(array $data = [])
+    public function getDeals(array $data = []): array
     {
         return $this->request('crm.deal.list', [
             'order' => !empty($data['order']) ? $data['order'] : ["ID" => 'DESC'],
@@ -43,12 +41,12 @@ trait Deal
 
     /**
      * Изменение сделки
-     * @param string|int $id
+     * @param string $id
      * @param array $data
      * @param bool $event
-     * @return mixed|null
+     * @return array
      */
-    public function updateDeal(string $id, array $data = [], bool $event = true)
+    public function updateDeal(string $id, array $data = [], bool $event = true): array
     {
         return $this->request('crm.deal.update', array_merge(
             ['id' => $id],

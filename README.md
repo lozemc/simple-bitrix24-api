@@ -25,8 +25,14 @@
 |     sendNotify      | [im.notify.personal.add](https://dev.1c-bitrix.ru/learning/course/index.php?COURSE_ID=93&LESSON_ID=12129&LESSON_PATH=7657.7685.7693.12129) |
 | sendTimelineComment |              [crm.timeline.comment.add](https://dev.1c-bitrix.ru/rest_help/crm/timeline/comment/crm_timeline_comment_add.php)              |
 
-
+###
 ### Пример использования
+
+#### Установка с помощью [Composer](https://packagist.org/packages/lozemc/simple-bitrix24-api)
+
+```bash
+composer require lozemc/simple-bitrix24-api
+```
 
 ```php
 <?php

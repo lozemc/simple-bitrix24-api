@@ -2,8 +2,6 @@
 
 namespace Lozemc;
 
-use RuntimeException;
-
 trait Lead
 {
     /**
@@ -19,7 +17,7 @@ trait Lead
 
     /**
      * Получение информации по лиду
-     * @param string|int $id
+     * @param string $id
      * @return array
      */
     public function getLead(string $id): array
@@ -43,7 +41,7 @@ trait Lead
 
     /**
      * Изменение лида
-     * @param string|int $id
+     * @param string $id
      * @param array $data
      * @param bool $event
      * @return array

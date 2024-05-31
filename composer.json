@@ -1,0 +1,39 @@
+{
+  "name": "lozemc/simple-bitrix24-api",
+  "type": "library",
+  "version": "1.0",
+  "description": "API для работы с REST API Битрикс24 средствами PHP",
+  "license": "MIT",
+  "keywords": [
+    "api",
+    "php",
+    "webhook",
+    "crm",
+    "bitrix",
+    "Bitrix24",
+    "api-wrapper"
+  ],
+  "homepage": "https://github.com/lozemc/",
+  "authors": [
+    {
+      "name": "Lozemc",
+      "email": "lozemc@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Lozemc\\": "src"
+    }
+  },
+  "require": {
+    "php": "^7.3|^7.4|^8.0|^8.1|^8.2",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^7.8"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.10"
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
+}

@@ -14,25 +14,60 @@ class B24
 
     private $config;
 
+    /** @var Client */
+    private $client;
+
+    /** @var float[] */
+    private $requestTimestamps = [];
+
+    /** @var int */
+    private $rateLimit;
+
     /**
      * @param string $id
      * @param string $host
      * @param string $token
+     * @param int $timeout
+     * @param int $rateLimit максимальное количество запросов в секунду
      */
-    public function __construct(string $id, string $host, string $token)
+    public function __construct(string $id, string $host, string $token, int $timeout = 30, int $rateLimit = 2)
     {
         $this->config = ['id' => $id, 'host' => $host, 'token' => $token];
+        $this->client = new Client(['timeout' => $timeout]);
+        $this->rateLimit = $rateLimit;
     }
 
     /**
      * @param $id
      * @param string $host
      * @param string $token
+     * @param int $timeout
+     * @param int $rateLimit
      * @return B24
      */
-    public static function init($id, string $host, string $token): B24
+    public static function init($id, string $host, string $token, int $timeout = 30, int $rateLimit = 2): B24
     {
-        return new self($id, $host, $token);
+        return new self($id, $host, $token, $timeout, $rateLimit);
+    }
+
+    private function throttle(): void
+    {
+        $now = microtime(true);
+
+        $this->requestTimestamps = array_values(array_filter(
+            $this->requestTimestamps,
+            static function ($t) use ($now) { return $now - $t < 1.0; }
+        ));
+
+        if (count($this->requestTimestamps) >= $this->rateLimit) {
+            $oldest = min($this->requestTimestamps);
+            $sleepUs = (int) ((1.0 - ($now - $oldest)) * 1000000);
+            if ($sleepUs > 0) {
+                usleep($sleepUs);
+            }
+        }
+
+        $this->requestTimestamps[] = microtime(true);
     }
 
     /**
@@ -43,8 +78,9 @@ class B24
      */
     public function request(string $method, array $values): array
     {
+        $this->throttle();
         try {
-            $response = (new Client())->post($this->getUrl($method), [
+            $response = $this->client->post($this->getUrl($method), [
                 'json' => $values,
             ]);
 
